@@ -25,4 +25,9 @@ class Actor: NSObject {
         return imageView
         
     }
+    
+    func teleport() {
+        self.x = 500
+        self.y = 500
+    }
 }
