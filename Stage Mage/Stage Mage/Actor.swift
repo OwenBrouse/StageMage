@@ -10,24 +10,29 @@ import UIKit
 class Actor: NSObject {
     var x: Int
     var y: Int
+    var width: Int
+    var select: Bool
+    var height: Int
+    var imageView = UIImageView(image: UIImage(named: "Actor Shape Tool")!)
     
-    init?(x: Int, y: Int){
+    init?(x: Int, y: Int, width: Int, height: Int){
         
     self.x = x
     self.y = y
-    }
-    func display() -> UIView{
-        //return x
-        let imageName = "Actor Shape Tool"
-        let image = UIImage(named: imageName)
-        let imageView = UIImageView(image: image!)
-        imageView.frame = CGRect(x: self.x, y: self.y, width: 100, height: 100)
-        return imageView
-        
+        self.select = false
+    self.width = width
+    self.height = width
+    self.imageView.frame = CGRect(x: self.x, y: self.y, width: self.width, height: self.height)
     }
     
-    func teleport() {
-        self.x = 500
-        self.y = 500
+    func updateImage() {
+        imageView.frame = CGRect(x: self.x, y: self.y, width: self.width, height: self.height)
+    }
+    func isTapped(tX: Int,tY: Int) {
+        if tX>self.x && tX < (self.x+self.width) {
+            if tY>self.y && tY<(self.y+self.height){
+                self.select = true
+            }
+        }
     }
 }
