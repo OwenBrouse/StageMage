@@ -2,15 +2,13 @@
 //  ViewController.swift
 //  Stage Mage
 //
-//  Created by Jacky Liang on 2018-10-30.
+//  Created by Jacky Liang and Owen Brouse on 2018-10-30.
 //  Copyright © 2018 KingByngInc. All rights reserved.
 //
 
 import UIKit
 
-
-
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIScrollViewDelegate{
     
     @IBOutlet weak var BackgroundImage: UIImageView!
     @IBOutlet weak var MenuView: UIView!
@@ -28,13 +26,17 @@ class ViewController: UIViewController {
         @IBOutlet weak var CoulorButton: UIButton!
         @IBOutlet weak var TrashButton: UIButton!
     @IBOutlet var MyView: UIView!
-  
+    @IBOutlet weak var scrollView: UIScrollView!
+    
     var actors = [Actor]()
-   
     
     @objc override func viewDidLoad() {
+        
         let tapGesture = UITapGestureRecognizer (target: self, action: #selector(Tele))
         view.addGestureRecognizer(tapGesture)
+        
+        self.scrollView.minimumZoomScale = 1.0
+        self.scrollView.maximumZoomScale = 6.0
     }
     
     /* Tap detection help: https://stackoverflow.com/questions/45629639/calling-function-when-user-taps-anywhere-on-screen */
@@ -76,6 +78,7 @@ class ViewController: UIViewController {
             }
         }
     }
+    
     @IBAction func MenuShift(_ sender: Any) {
         if MenuButton.frame.origin.y <= 20{
             UIView.animate(withDuration: 0.5) {
@@ -91,6 +94,7 @@ class ViewController: UIViewController {
             }
         }
     }
+    
     @IBAction func deletActor(_ sender: Any) {
         for i in 0...actors.count-1{
             if actors[i].select == true{
@@ -100,6 +104,12 @@ class ViewController: UIViewController {
             }
         }
     }
+    
+    // Zooming tutorial: https://www.youtube.com/watch?v=TEBDwYkYx00
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return self.BackgroundImage
+    }
+    
     //    @IBAction func resize(_ sender: Any) {
 //        UIView.animate(withDuration: 1.0) {
 //            self.BackgroundImage.autoresizesSubviews = true
