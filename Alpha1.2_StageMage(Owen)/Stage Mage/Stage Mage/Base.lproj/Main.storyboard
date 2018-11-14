@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="ipad10_5" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,18 +20,18 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wdN-as-0Pf">
                                 <rect key="frame" x="0.0" y="20" width="1112" height="814"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SWL Caf" translatesAutoresizingMaskIntoConstraints="NO" id="xuY-kC-dDh">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SWL Caf" translatesAutoresizingMaskIntoConstraints="NO" id="xuY-kC-dDh">
                                         <rect key="frame" x="0.0" y="0.0" width="1112" height="814"/>
                                         <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                     </imageView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="xuY-kC-dDh" secondAttribute="trailing" id="0Wy-NT-0ko"/>
-                                    <constraint firstItem="xuY-kC-dDh" firstAttribute="top" secondItem="wdN-as-0Pf" secondAttribute="top" id="FRG-ZS-mtI"/>
-                                    <constraint firstAttribute="bottom" secondItem="xuY-kC-dDh" secondAttribute="bottom" id="JcH-Ak-yb1"/>
-                                    <constraint firstItem="xuY-kC-dDh" firstAttribute="centerY" secondItem="wdN-as-0Pf" secondAttribute="centerY" id="TrF-rh-5dA"/>
-                                    <constraint firstItem="xuY-kC-dDh" firstAttribute="centerX" secondItem="wdN-as-0Pf" secondAttribute="centerX" id="Xav-ht-oW5"/>
-                                    <constraint firstItem="xuY-kC-dDh" firstAttribute="leading" secondItem="wdN-as-0Pf" secondAttribute="leading" id="ZU8-05-eUG"/>
+                                    <constraint firstItem="xuY-kC-dDh" firstAttribute="top" secondItem="wdN-as-0Pf" secondAttribute="top" id="3y7-yr-o4s"/>
+                                    <constraint firstAttribute="trailing" secondItem="xuY-kC-dDh" secondAttribute="trailing" id="CUQ-88-Kdw"/>
+                                    <constraint firstItem="xuY-kC-dDh" firstAttribute="centerY" secondItem="wdN-as-0Pf" secondAttribute="centerY" id="cbZ-Sy-5wK"/>
+                                    <constraint firstAttribute="bottom" secondItem="xuY-kC-dDh" secondAttribute="bottom" id="h9N-m0-A6P"/>
+                                    <constraint firstItem="xuY-kC-dDh" firstAttribute="leading" secondItem="wdN-as-0Pf" secondAttribute="leading" id="tHg-Iw-VBK"/>
+                                    <constraint firstItem="xuY-kC-dDh" firstAttribute="centerX" secondItem="wdN-as-0Pf" secondAttribute="centerX" id="yik-f3-Aw7"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="42S-wP-HHC"/>
@@ -49,7 +49,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gBn-vq-tQm">
-                                <rect key="frame" x="0.0" y="20" width="1112" height="86"/>
+                                <rect key="frame" x="0.0" y="20" width="1112" height="98"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fgp-fJ-qtY">
                                         <rect key="frame" x="80" y="4" width="78" height="78"/>
@@ -61,7 +61,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Button" image="Open File Tool"/>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4cL-aS-V0F">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4cL-aS-V0F">
                                         <rect key="frame" x="338" y="4" width="78" height="78"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Button" image="Rotate Tool"/>
@@ -102,12 +102,12 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Button" image="Lighting Icon"/>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nVI-eV-Dml">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nVI-eV-Dml">
                                         <rect key="frame" x="940" y="4" width="78" height="78"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Button" image="Colour"/>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="woH-zW-HPa">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="woH-zW-HPa">
                                         <rect key="frame" x="1026" y="4" width="78" height="78"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Button" image="Trash Icon"/>
@@ -127,18 +127,18 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="wdN-as-0Pf" secondAttribute="trailing" id="1qA-IX-x4h"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="fae-1o-Zgu" secondAttribute="trailing" constant="952" id="58m-0T-nXy"/>
-                            <constraint firstItem="wdN-as-0Pf" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="6O1-2O-npC"/>
-                            <constraint firstItem="wdN-as-0Pf" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="8JE-Gr-4x0"/>
-                            <constraint firstItem="gBn-vq-tQm" firstAttribute="trailing" secondItem="wdN-as-0Pf" secondAttribute="trailing" id="AaO-EK-FzQ"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="fae-1o-Zgu" secondAttribute="bottom" constant="652" id="EI6-js-Gig"/>
-                            <constraint firstItem="gBn-vq-tQm" firstAttribute="leading" secondItem="wdN-as-0Pf" secondAttribute="leading" id="KHY-0D-eEp"/>
-                            <constraint firstItem="fae-1o-Zgu" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="81" id="Lsr-zH-rOk"/>
-                            <constraint firstItem="gBn-vq-tQm" firstAttribute="top" secondItem="wdN-as-0Pf" secondAttribute="top" id="Vog-9m-O7l"/>
-                            <constraint firstItem="fae-1o-Zgu" firstAttribute="top" secondItem="gBn-vq-tQm" secondAttribute="bottom" constant="8" symbolic="YES" id="dpY-RV-DNP"/>
-                            <constraint firstItem="wdN-as-0Pf" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="fbE-44-owb"/>
-                            <constraint firstAttribute="bottom" secondItem="gBn-vq-tQm" secondAttribute="bottom" constant="728" id="mta-xU-iuG"/>
+                            <constraint firstItem="wdN-as-0Pf" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="8BM-AF-0L3"/>
+                            <constraint firstItem="wdN-as-0Pf" firstAttribute="leading" secondItem="gBn-vq-tQm" secondAttribute="leading" id="Cst-gE-Phj"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="gBn-vq-tQm" secondAttribute="bottom" constant="716" id="Cvl-dc-gbr"/>
+                            <constraint firstItem="fae-1o-Zgu" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="94" id="IkS-iq-vU4"/>
+                            <constraint firstAttribute="trailing" secondItem="gBn-vq-tQm" secondAttribute="trailing" id="JJt-pW-GDm"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="fae-1o-Zgu" secondAttribute="bottom" constant="652" id="WoY-Je-Hex"/>
+                            <constraint firstItem="fae-1o-Zgu" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="81" id="acA-i0-rYs"/>
+                            <constraint firstItem="wdN-as-0Pf" firstAttribute="top" secondItem="gBn-vq-tQm" secondAttribute="top" id="eJz-wM-tEI"/>
+                            <constraint firstItem="wdN-as-0Pf" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="hbB-iA-ne2"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="fae-1o-Zgu" secondAttribute="trailing" constant="952" id="lcQ-Jn-mS1"/>
+                            <constraint firstItem="gBn-vq-tQm" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="u6D-FV-Cd2"/>
+                            <constraint firstItem="gBn-vq-tQm" firstAttribute="trailing" secondItem="wdN-as-0Pf" secondAttribute="trailing" id="xsP-aU-He4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <connections>
@@ -180,12 +180,12 @@
         <image name="Actor Shape Tool" width="960" height="720"/>
         <image name="Animation Icon" width="960" height="720"/>
         <image name="Camera Tool" width="960" height="720"/>
-        <image name="Colour" width="691.20001220703125" height="388.79998779296875"/>
+        <image name="Colour" width="1152" height="648"/>
         <image name="Lighting Icon" width="960" height="720"/>
         <image name="Open File Tool" width="960" height="720"/>
         <image name="Props Icon" width="960" height="720"/>
         <image name="Rotate Tool" width="960" height="720"/>
-        <image name="SWL Caf" width="217.41732788085938" height="184.25196838378906"/>
+        <image name="SWL Caf" width="2301" height="1950"/>
         <image name="Save Icon" width="960" height="720"/>
         <image name="Selection Tool" width="960" height="720"/>
         <image name="Sets icon" width="960" height="720"/>
