@@ -29,6 +29,8 @@ class Item: NSObject {
         self.colour = UIColor.black
         self.imageView = UIImageView(image: UIImage(named: self.type))
         self.imageView.frame = CGRect(x: self.x, y: self.y, width: self.width, height: self.height)
+        self.imageView.isUserInteractionEnabled = true
+        self.imageView.isMultipleTouchEnabled = true
         self.imageView.image = imageView.image?.withRenderingMode(.alwaysTemplate)
     }
     

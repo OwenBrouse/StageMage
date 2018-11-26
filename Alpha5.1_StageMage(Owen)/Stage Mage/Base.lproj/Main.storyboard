@@ -55,7 +55,7 @@
                                         <attributedString key="attributedText">
                                             <fragment content="Properties">
                                                 <attributes>
-                                                    <font key="NSFont" size="36" name="BellGothicStd-Bold"/>
+                                                    <font key="NSFont" metaFont="system" size="36"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
@@ -76,7 +76,7 @@
                                         <attributedString key="attributedText">
                                             <fragment content="x:">
                                                 <attributes>
-                                                    <font key="NSFont" size="64" name="BellGothicStd-Bold"/>
+                                                    <font key="NSFont" metaFont="system" size="64"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
@@ -98,7 +98,7 @@
                                         <attributedString key="attributedText">
                                             <fragment content="Y:">
                                                 <attributes>
-                                                    <font key="NSFont" size="61" name="BellGothicStd-Bold"/>
+                                                    <font key="NSFont" metaFont="system" size="61"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
@@ -120,7 +120,7 @@
                                         <attributedString key="attributedText">
                                             <fragment content="W:">
                                                 <attributes>
-                                                    <font key="NSFont" size="50" name="BellGothicStd-Bold"/>
+                                                    <font key="NSFont" metaFont="system" size="50"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
@@ -142,7 +142,7 @@
                                         <attributedString key="attributedText">
                                             <fragment content="H:">
                                                 <attributes>
-                                                    <font key="NSFont" size="60" name="BellGothicStd-Bold"/>
+                                                    <font key="NSFont" metaFont="system" size="60"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
@@ -177,8 +177,8 @@
                                             <fragment content=":">
                                                 <attributes>
                                                     <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                    <font key="NSFont" size="55" name="BellGothicStd-Bold"/>
-                                                    <font key="NSOriginalFont" size="55" name="BellGothicStd-Bold"/>
+                                                    <font key="NSFont" metaFont="system" size="55"/>
+                                                    <font key="NSOriginalFont" metaFont="system" size="55"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
                                                         <tabStops/>
                                                     </paragraphStyle>
@@ -519,7 +519,7 @@
         <image name="Open File Tool" width="960" height="720"/>
         <image name="Props Tool" width="960" height="720"/>
         <image name="Rotate Tool" width="960" height="720"/>
-        <image name="SWL Caf" width="217.41732788085938" height="184.25196838378906"/>
+        <image name="SWL Caf" width="2301" height="1950"/>
         <image name="Save Tool" width="960" height="720"/>
         <image name="Selection Tool" width="960" height="720"/>
         <image name="Sets icon" width="960" height="720"/>

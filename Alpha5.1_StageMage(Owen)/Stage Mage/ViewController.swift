@@ -42,6 +42,9 @@ class ViewController: UIViewController, UIScrollViewDelegate{
     @IBOutlet var MyView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
     
+    var rotateGesture = UIRotationGestureRecognizer()
+    var lastRotation = CGFloat()
+    
         //listsAndOther................................................................................................................listsAndOther
     var items = [Item]()
     var animations = [Animator]()
@@ -50,16 +53,21 @@ class ViewController: UIViewController, UIScrollViewDelegate{
     //"VoidSetup"////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////"VoidSetup"
     @objc override func viewDidLoad() {
         
+        // Define Rotate
+        rotateGesture = UIRotationGestureRecognizer(target: self, action: #selector(rotateObject(sender:)))
+        
+        self.scrollView.addGestureRecognizer(rotateGesture)
+        
         //TouchScreenGestuirs (Creation/definition)
         let tapGesture = UITapGestureRecognizer (target: self, action: #selector(Tap))
         let panGesture = UIPanGestureRecognizer (target: self, action: #selector(Pan))
         view.addGestureRecognizer(tapGesture)
         view.addGestureRecognizer(panGesture)
-        
+    
         //Scroll View (Creation/definition)
         scrollView.isScrollEnabled = false
-        self.scrollView.minimumZoomScale = 0.75
-        self.scrollView.maximumZoomScale = 7.5
+        self.scrollView.minimumZoomScale = 1
+        self.scrollView.maximumZoomScale = 5
         
         //Animation Force Example
         animations.append(Animator(x: 500, y: 300, time: 3.5, identity: 0,type: false)!)
@@ -79,6 +87,17 @@ class ViewController: UIViewController, UIScrollViewDelegate{
         PropertyMenuView.isHidden = true
         
     }
+    
+    // Rotate Function
+    @objc func rotateObject(sender : UIRotationGestureRecognizer) {
+        guard sender.view != nil else {return}
+        
+        if (sender.state == .began || sender.state == .changed) {
+            sender.view?.transform = sender.view!.transform.rotated(by: sender.rotation)
+            sender.rotation = 0;
+        }
+    }
+    
 //ReactionFuntion#############################################################################################################################ReactionFuntion
 //ReactionFuntion#############################################################################################################################ReactionFuntion
     //TouchDetection//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////TouchDetection
