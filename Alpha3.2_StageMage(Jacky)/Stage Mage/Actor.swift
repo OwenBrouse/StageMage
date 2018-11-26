@@ -22,6 +22,8 @@ class Actor: NSObject {
         self.width = width
         self.height = height
         self.imageView.frame = CGRect(x: self.x, y: self.y, width: self.width, height: self.height)
+        self.imageView.isUserInteractionEnabled = true
+        self.imageView.isMultipleTouchEnabled = true
     }
     
     func updateImage(xPos: Int,yPos: Int) {

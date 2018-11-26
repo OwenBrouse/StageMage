@@ -10,7 +10,6 @@ import UIKit
 
 class ViewController: UIViewController, UIScrollViewDelegate{
     
-    @IBOutlet weak var BackgroundImage: UIImageView!
     @IBOutlet weak var MenuView: UIView!
     @IBOutlet weak var MenuButton: UIButton!
         @IBOutlet weak var SaveButton: UIButton!
@@ -27,22 +26,39 @@ class ViewController: UIViewController, UIScrollViewDelegate{
         @IBOutlet weak var TrashButton: UIButton!
     @IBOutlet var MyView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
+        @IBOutlet weak var BackgroundImage: UIImageView!
     
     var actors = [Actor]()
     
-    @objc override func viewDidLoad() {
+    var rotateGesture = UIRotationGestureRecognizer()
+    var lastRotation = CGFloat()
+    
+    override func viewDidLoad() {
+        
+        super.viewDidLoad()
+        
+        rotateGesture = UIRotationGestureRecognizer(target: self, action: #selector(rotateObject(sender:)))
         
         let tapGesture = UITapGestureRecognizer (target: self, action: #selector(Tap))
         let panGesture = UIPanGestureRecognizer (target: self, action: #selector(Pan))
         view.addGestureRecognizer(tapGesture)
         view.addGestureRecognizer(panGesture)
-        
+    
         scrollView.isScrollEnabled = false
-        self.scrollView.minimumZoomScale = 0.75
-        self.scrollView.maximumZoomScale = 7.5
+        self.scrollView.minimumZoomScale = 1
+        self.scrollView.maximumZoomScale = 5
+            
+        self.view.addGestureRecognizer(rotateGesture)
     }
     
-    /* Tap detection help: https://stackoverflow.com/questions/45629639/calling-function-when-user-taps-anywhere-on-screen */
+    @objc func rotateObject(sender : UIRotationGestureRecognizer) {
+        guard sender.view != nil else {return}
+        
+        if (sender.state == .began || sender.state == .changed) {
+            sender.view?.transform = sender.view!.transform.rotated(by: sender.rotation)
+            sender.rotation = 0;
+        }
+    }
     
     @IBAction func addActor(_ sender: Any) {
         let screenAspect = Float(BackgroundImage.frame.width/MyView.frame.width)
@@ -55,6 +71,7 @@ class ViewController: UIViewController, UIScrollViewDelegate{
                             height: 25)!)
         BackgroundImage.addSubview(actors[actors.count-1].imageView)
     }
+    
     @IBAction func Pan(_ sender: UIPanGestureRecognizer) {
         //https://www.raywenderlich.com/433-uigesturerecognizer-tutorial-getting-started
         let translation = sender.translation(in: self.view)
@@ -90,7 +107,8 @@ class ViewController: UIViewController, UIScrollViewDelegate{
             
         }
     }
-        
+    
+    /* Tap detection help: https://stackoverflow.com/questions/45629639/calling-function-when-user-taps-anywhere-on-screen */
     @IBAction func Tap(_ sender: UITapGestureRecognizer) {//TAP DETECTION//
         let tapX = Float(sender.location(in: MyView).x)-Float(BackgroundImage.positionIn(view: MyView).origin.x)
         let tapY = Float(sender.location(in: MyView).y)-Float(BackgroundImage.positionIn(view: MyView).origin.y)
@@ -145,9 +163,9 @@ class ViewController: UIViewController, UIScrollViewDelegate{
     // Tutorial: https://www.youtube.com/watch?v=I286E98s3Ig
     @IBAction func rotatePress(_ sender: Any) {
         
-        UIView.animate(withDuration: 1, animations: {
-            self.BackgroundImage.transform = CGAffineTransform(rotationAngle: CGFloat.pi/2)
-        })
+        //UIView.animate(withDuration: 1, animations: {
+            //self.BackgroundImage.transform = CGAffineTransform(rotationAngle: CGFloat.pi/2)
+        //})
     }
     
     // Zooming tutorial: https://www.youtube.com/watch?v=TEBDwYkYx00
@@ -155,6 +173,7 @@ class ViewController: UIViewController, UIScrollViewDelegate{
         return self.BackgroundImage
     }
 }
+
 //taken from: https://medium.com/@joesusnick/a-uiview-extension-that-will-teach-you-an-important-lesson-about-frames-cefe1e4beb0b
 extension UIView {
     func positionIn(view: UIView) -> CGRect {
@@ -164,12 +183,9 @@ extension UIView {
         return frame
     }
 }
+
 extension ViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
-    
-    
 }
-
-
