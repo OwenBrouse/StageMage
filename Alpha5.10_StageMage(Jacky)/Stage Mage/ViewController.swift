@@ -51,14 +51,21 @@ class ViewController: UIViewController, UIScrollViewDelegate{
     //listsAndOther................................................................................................................listsAndOther
     var items = [Item]()
     var animations = [Animator]()
+    
     var c = [UISegmentedControl]()
+    var tapGesture = UITapGestureRecognizer()
+    var panGesture = UIPanGestureRecognizer()
+    var rotateGesture = UIRotationGestureRecognizer()
+    
+    var lastRotation = CGFloat()
     
     //"VoidSetup"////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////"VoidSetup"
     @objc override func viewDidLoad() {
         
         //TouchScreenGestuirs (Creation/definition)
-        let tapGesture = UITapGestureRecognizer (target: self, action: #selector(Tap))
-        let panGesture = UIPanGestureRecognizer (target: self, action: #selector(Pan))
+        tapGesture = UITapGestureRecognizer (target: self, action: #selector(Tap))
+        panGesture = UIPanGestureRecognizer (target: self, action: #selector(Pan))
+        rotateGesture = UIRotationGestureRecognizer (target: self, action: #selector(rotateObject(sender:)))
         view.addGestureRecognizer(tapGesture)
         view.addGestureRecognizer(panGesture)
         
@@ -195,7 +202,7 @@ class ViewController: UIViewController, UIScrollViewDelegate{
         let halfScreenHeight = Float(MyView.frame.height)/2;
         
         items.append(Item(x: Int(( halfScreenWidth-Float(BackgroundImage.positionIn(view: MyView).origin.x))*(1/screenAspect)),
-                          y: Int((halfScreenHeight-Float(BackgroundImage.positionIn(view: MyView).origin.y))*(1/screenAspect)),
+                          y: Int((halfScreenHeight-Float(BackgroundImage.positionIn(view: MyView).origin.y))*(1/screenAspect)), angle: 0,
                           width: 30,
                           height: 25,
                           name: "Unnamed Actor",
@@ -211,7 +218,7 @@ class ViewController: UIViewController, UIScrollViewDelegate{
         let halfScreenHeight = Float(MyView.frame.height)/2;
         
         items.append(Item(x: Int(( halfScreenWidth-Float(BackgroundImage.positionIn(view: MyView).origin.x))*(1/screenAspect)),
-                          y: Int((halfScreenHeight-Float(BackgroundImage.positionIn(view: MyView).origin.y))*(1/screenAspect)),
+                          y: Int((halfScreenHeight-Float(BackgroundImage.positionIn(view: MyView).origin.y))*(1/screenAspect)), angle: 0,
                           width: 50,
                           height: 30,
                           name: "Unnamed Set piece",
@@ -277,6 +284,28 @@ class ViewController: UIViewController, UIScrollViewDelegate{
     
         //Rotate_Button----------------------------------------------------------------------------------------------------------------Rotate_Button
     @IBAction func rotatePress(_ sender: Any) {
+        
+        
+        if items.count > 0 {
+            for i in 0...items.count-1 {
+                if items[i].select == true {
+                    items[i].angle += 1/6 * .pi
+                    print(items[i].angle)
+                    items[i].imageView.transform = CGAffineTransform(rotationAngle: items[i].angle)
+                }
+            }
+            print("pressed")
+        }
+    }
+    
+    //Rotate Function
+    @objc func rotateObject(sender : UIRotationGestureRecognizer) {
+    guard sender.view != nil else {return}
+    if (sender.state == .began || sender.state == .changed) {
+    sender.view?.transform = sender.view!.transform.rotated(by: sender.rotation)
+    sender.rotation = 0;
+    print("Rotating")
+        }
     }
 
         //Animate_Button--------------------------------------------------------------------------------------------------------------Animate_Button

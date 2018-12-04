@@ -10,6 +10,7 @@ import UIKit
 class Item: NSObject {
     var x: Int
     var y: Int
+    var angle: CGFloat
     var width: Int
     var select: Bool
     var height: Int
@@ -19,9 +20,10 @@ class Item: NSObject {
     var imageView = UIImageView()
     let selectView = UIImageView(image: UIImage(named: "Select"))
     
-    init?(x: Int, y: Int, width: Int, height: Int, name: String, type: String){
+    init?(x: Int, y: Int, angle: CGFloat, width: Int, height: Int, name: String, type: String){
         self.x = x
         self.y = y
+        self.angle = angle
         self.select = false
         self.width = width
         self.height = height
@@ -30,6 +32,7 @@ class Item: NSObject {
         self.colour = UIColor.black
         self.imageView = UIImageView(image: UIImage(named: self.type))
         self.imageView.frame = CGRect(x: self.x, y: self.y, width: self.width, height: self.height)
+        self.imageView.transform = CGAffineTransform(rotationAngle: angle)
         self.imageView.image = imageView.image?.withRenderingMode(.alwaysTemplate)
         self.selectView.image = selectView.image?.withRenderingMode(.alwaysTemplate)
     }
@@ -38,6 +41,7 @@ class Item: NSObject {
         
         imageView.tintColor = colour
         imageView.frame = CGRect(x: xPos, y: yPos, width: self.width, height: self.height)
+        imageView.transform = CGAffineTransform(rotationAngle: angle)
         
         if imageView.subviews.count>0 {selectView.removeFromSuperview()}
        
