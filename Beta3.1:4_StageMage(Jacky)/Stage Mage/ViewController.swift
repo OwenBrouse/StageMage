@@ -11,7 +11,6 @@
 //Import------------------------------------------------------------------------------------------------------------------------------------------Import
 import UIKit
 
-
 class ViewController: UIViewController, UIScrollViewDelegate{
     //VariableCreation/definition--------------------------------------------------------------------------------------------VariableCreation/definition
         //StoryBoardObjects........................................................................................................StoryBoardObjects
@@ -56,8 +55,13 @@ class ViewController: UIViewController, UIScrollViewDelegate{
     var animations = [Animator]()
     var c = [UISegmentedControl]()
     
+    @IBOutlet weak var label: UILabel!
+    
+    var mString = String()
     //"VoidSetup"////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////"VoidSetup"
     @objc override func viewDidLoad() {
+        
+        label.text = mString
         
         //TouchScreenGestuirs (Creation/definition)
         let tapGesture = UITapGestureRecognizer (target: self, action: #selector(Tap))
@@ -87,7 +91,11 @@ class ViewController: UIViewController, UIScrollViewDelegate{
         MenuButton.frame.origin.y = MenuView.frame.height
         
         
+        
     }
+    
+   
+    
 //ReactionFuntion#############################################################################################################################ReactionFuntion
 //ReactionFuntion#############################################################################################################################ReactionFuntion
     //TouchDetection//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////TouchDetection
@@ -240,6 +248,9 @@ class ViewController: UIViewController, UIScrollViewDelegate{
         }
     }
     //Buttons////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////Buttons
+    
+    
+    
         //Actor_Button------------------------------------------------------------------------------------------------------------------Actor_Button
     @IBAction func addActor(_ sender: Any) {
         let screenAspect = Float(BackgroundImage.frame.width/MyView.frame.width)

@@ -8,16 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		09DFD42221A48A5E003D0CD9 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09DFD42121A48A5E003D0CD9 /* Animator.swift */; };
+		5C43DAA121E2FC7000328FF5 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C43DAA021E2FC6F00328FF5 /* SecondViewController.swift */; };
 		5C5FFE372188CC48003F3ABB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5FFE362188CC48003F3ABB /* AppDelegate.swift */; };
 		5C5FFE392188CC48003F3ABB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5FFE382188CC48003F3ABB /* ViewController.swift */; };
 		5C5FFE3C2188CC48003F3ABB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C5FFE3A2188CC48003F3ABB /* Main.storyboard */; };
 		5C5FFE3E2188CC49003F3ABB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C5FFE3D2188CC49003F3ABB /* Assets.xcassets */; };
 		5C5FFE412188CC49003F3ABB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C5FFE3F2188CC49003F3ABB /* LaunchScreen.storyboard */; };
+		5C92760A21CABA15009807EE /* SaveAndLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C92760921CABA15009807EE /* SaveAndLoad.swift */; };
 		5CF189E52190B0FC00FE6DFC /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF189E42190B0FC00FE6DFC /* Item.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		09DFD42121A48A5E003D0CD9 /* Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
+		5C43DAA021E2FC6F00328FF5 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		5C5FFE332188CC48003F3ABB /* Stage Mage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Stage Mage.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C5FFE362188CC48003F3ABB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5C5FFE382188CC48003F3ABB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -25,6 +28,7 @@
 		5C5FFE3D2188CC49003F3ABB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5C5FFE402188CC49003F3ABB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5C5FFE422188CC49003F3ABB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5C92760921CABA15009807EE /* SaveAndLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveAndLoad.swift; sourceTree = "<group>"; };
 		5CF189E42190B0FC00FE6DFC /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -58,12 +62,14 @@
 		5C5FFE352188CC48003F3ABB /* Stage Mage */ = {
 			isa = PBXGroup;
 			children = (
-				5C5FFE362188CC48003F3ABB /* AppDelegate.swift */,
 				5C5FFE382188CC48003F3ABB /* ViewController.swift */,
-				5C5FFE3A2188CC48003F3ABB /* Main.storyboard */,
+				5C43DAA021E2FC6F00328FF5 /* SecondViewController.swift */,
+				5C5FFE362188CC48003F3ABB /* AppDelegate.swift */,
 				5CF189E42190B0FC00FE6DFC /* Item.swift */,
 				09DFD42121A48A5E003D0CD9 /* Animator.swift */,
+				5C92760921CABA15009807EE /* SaveAndLoad.swift */,
 				5C5FFE3F2188CC49003F3ABB /* LaunchScreen.storyboard */,
+				5C5FFE3A2188CC48003F3ABB /* Main.storyboard */,
 				5C5FFE3D2188CC49003F3ABB /* Assets.xcassets */,
 				5C5FFE422188CC49003F3ABB /* Info.plist */,
 			);
@@ -142,10 +148,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C43DAA121E2FC7000328FF5 /* SecondViewController.swift in Sources */,
 				09DFD42221A48A5E003D0CD9 /* Animator.swift in Sources */,
 				5CF189E52190B0FC00FE6DFC /* Item.swift in Sources */,
 				5C5FFE392188CC48003F3ABB /* ViewController.swift in Sources */,
 				5C5FFE372188CC48003F3ABB /* AppDelegate.swift in Sources */,
+				5C92760A21CABA15009807EE /* SaveAndLoad.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
