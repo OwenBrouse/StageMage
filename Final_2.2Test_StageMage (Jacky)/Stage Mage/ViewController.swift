@@ -11,7 +11,6 @@
 //Import------------------------------------------------------------------------------------------------------------------------------------------Import
 import UIKit
 
-
 class ViewController: UIViewController, UIScrollViewDelegate{
     //VariableCreation/definition--------------------------------------------------------------------------------------------VariableCreation/definition
         //StoryBoardObjects........................................................................................................StoryBoardObjects
@@ -46,37 +45,44 @@ class ViewController: UIViewController, UIScrollViewDelegate{
             @IBOutlet weak var aniScrollView: UIView!
                 @IBOutlet weak var aniHeight: NSLayoutConstraint!
                 @IBOutlet weak var addAni: UIButton!
-                @IBOutlet weak var addCurtainAni: UIButton!
-        @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var playButton: UIButton!
         @IBOutlet weak var pauseButon: UIButton!
-        @IBOutlet weak var StopButton: UIButton!
     @IBOutlet var MyView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
     
     //listsAndOther................................................................................................................listsAndOther
     var items = [Item]()
     var animations = [Animator]()
-    
-    var aniStep = 0
-    var animating = false
-    
-    let arrowRot = UIView()
-    var arrow = UIImageView()
-    
     var c = [UISegmentedControl]()
-    var c1 = UIImageView()
-    var ch1 = UIView()
-    var c2 = UIImageView()
-    var ch2 = UIView()
+    
+    @IBOutlet weak var label: UILabel!
+    
+    var mString = String()
+    var savedItem = [Any]()
+    var savedAnime = [Any]()
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        var secController = segue.destination as! SecondViewController
+        
+        // Pass the selected object to the new view controller.
+        secController.loadItem = savedItem
+        secController.loadAnime = savedAnime
+        
+    }
     
     //"VoidSetup"////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////"VoidSetup"
     @objc override func viewDidLoad() {
         
-        items.append(Item(x: -100000, y: -100000, width: 0, height: 0, angle : 0, name: "", type: "")!)
+        savedItem = items
+        savedAnime = animations
+        
+        label.text = mString
         
         //TouchScreenGestuirs (Creation/definition)
         let tapGesture = UITapGestureRecognizer (target: self, action: #selector(Tap))
         let panGesture = UIPanGestureRecognizer (target: self, action: #selector(Pan))
+        
         view.addGestureRecognizer(tapGesture)
         view.addGestureRecognizer(panGesture)
         
@@ -100,21 +106,54 @@ class ViewController: UIViewController, UIScrollViewDelegate{
 //        MenuButton.frame.height = MenuView.frame.height
         MenuButton.frame.origin.x = MenuView.frame.width/20
         MenuButton.frame.origin.y = MenuView.frame.height
-     
-        c1 = UIImageView.init(image: UIImage(named: "Set Shapes"))
-        c1.frame = CGRect(x: 0, y: 0, width: 225, height: 15)
-        ch1.frame = CGRect(x: 17*BackgroundImage.frame.width/30, y: BackgroundImage.frame.height/6.5, width: 0, height: 0)
-        ch1.transform = CGAffineTransform(rotationAngle: 1.25)
-        ch1.addSubview(c1)
-        BackgroundImage.addSubview(ch1)
         
-        c2 = UIImageView.init(image: UIImage(named: "Set Shapes"))
-        c2.frame = CGRect(x: 0, y: 0, width: 190, height: 15)
-        ch2.frame = CGRect(x: 3*BackgroundImage.frame.width/4, y: BackgroundImage.frame.height/1.8, width: 0, height: 0)
-        ch2.transform = CGAffineTransform(rotationAngle: 3.78)
-        ch2.addSubview(c2)
-        BackgroundImage.addSubview(ch2)
+        let fileName = "savedProjects"
+        let documentDirURL = try!FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+        
+        let fileURL = documentDirURL.appendingPathComponent(fileName).appendingPathExtension("txt")
+        print("FilePath: \(fileURL.path)")
+        
+        let writeString = "Write this text to the file in Swift"
+        do {
+            // Write to the file
+            try writeString.write(to: fileURL, atomically: true, encoding: String.Encoding.utf8)
+        } catch let error as NSError {
+            print("failed to write")
+            print(error)
+        }
+        
+        var readString = ""
+        do {
+            readString = try String(contentsOf: fileURL)
+        } catch let error as NSError{
+            print("failed to find file")
+            print(error)
+        }
+        
+        print(readString)
+        
+        let randomFileName = UUID().uuidString
+        let savePath = documentDirURL.appendingPathComponent(randomFileName)
+        
+
+        do {
+            let data = try NSKeyedArchiver.archivedData(withRootObject: items, requiringSecureCoding: true)
+            
+            try data.write(to: savePath)
+        }catch {
+                print("couldn't write file")
+        }
+        
+        //do {
+          //  if let loadItem = try NSKeyedUnarchiver.unarchiveObject(withFile: randomFileName) {
+           //     savedItem = [loadItem]
+          //  }
+       // }catch {
+       //     print("Couldn't find file")
+      //  }
     }
+    
+    
 //ReactionFuntion#############################################################################################################################ReactionFuntion
 //ReactionFuntion#############################################################################################################################ReactionFuntion
     //TouchDetection//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////TouchDetection
@@ -156,6 +195,7 @@ class ViewController: UIViewController, UIScrollViewDelegate{
                         items[i].x = items[i].x+Int(Float(translation.x)*Float(1/aspect))
                         items[i].y = items[i].y+Int(Float(translation.y)*Float(1/aspect))
                         items[i].updateImage(xPos: items[i].x, yPos: items[i].y)
+                        EmptyProprties()
                     }
                 }
             }
@@ -172,13 +212,6 @@ class ViewController: UIViewController, UIScrollViewDelegate{
         let tapX = Float(sender.location(in: MyView).x)-Float(BackgroundImage.positionIn(view: MyView).origin.x)
         let tapY = Float(sender.location(in: MyView).y)-Float(BackgroundImage.positionIn(view: MyView).origin.y)
         let aspect = Float(BackgroundImage.frame.width/MyView.frame.width)
-        
-        if CurserButton.isSelected == false{
-            for i in 0...items.count-1{
-                items[i].select = false
-                items[i].updateImage(xPos: items[i].x, yPos: items[i].y)
-            }
-        }
         
         if items.count > 0{
             addAni.backgroundColor = UIColor.white
@@ -274,17 +307,9 @@ class ViewController: UIViewController, UIScrollViewDelegate{
     }
     //Buttons////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////Buttons
     
-    @IBAction func mutiSelect(_ sender: Any) {
-        if CurserButton.isSelected == true {
-            CurserButton.isSelected = false
-            CurserButton.backgroundColor = UIColor.white
-        }else{
-            CurserButton.isSelected = true
-            CurserButton.backgroundColor = UIColor.gray
-        }
-    }
     
-    //Actor_Button------------------------------------------------------------------------------------------------------------------Actor_Button
+    
+        //Actor_Button------------------------------------------------------------------------------------------------------------------Actor_Button
     @IBAction func addActor(_ sender: Any) {
         let screenAspect = Float(BackgroundImage.frame.width/MyView.frame.width)
         let halfScreenWidth = Float(MyView.frame.width)/2;
@@ -297,7 +322,7 @@ class ViewController: UIViewController, UIScrollViewDelegate{
                           angle : 0,
                           name: "Unnamed Actor",
                           type: "Actor Shape")!)
-        BackgroundImage.addSubview(items[items.count-1].sv)
+        BackgroundImage.addSubview(items[items.count-1].imageView)
         items[items.count-1].updateImage(xPos: items[items.count-1].x, yPos: items[items.count-1].y)
     }
     
@@ -314,7 +339,7 @@ class ViewController: UIViewController, UIScrollViewDelegate{
                           angle : 0,
                           name: "Unnamed Set piece",
                           type: "Set Shapes")!)
-        BackgroundImage.addSubview(items[items.count-1].sv)
+        BackgroundImage.addSubview(items[items.count-1].imageView)
         items[items.count-1].updateImage(xPos: items[items.count-1].x, yPos: items[items.count-1].y)
     }
     
@@ -366,21 +391,14 @@ class ViewController: UIViewController, UIScrollViewDelegate{
     
         //trash_Button------------------------------------------------------------------------------------------------------------------trash_Button
     @IBAction func deletActor(_ sender: Any) {//self explanitory
-       for i in 0...items.count-1{
-            if items[i].select == true{
-                if animations.count>0{
-                    for j in stride(from:animations.count-1, to: -1, by:-1 ){
-                        if animations[j].identity == items[i]{
-                            animations[j].box.removeFromSuperview()
-                            animations.remove(at: j)
-                        }
-                    }
-                    UpdateAnimationMenu()
+        if items.count > 0{
+            for i in 0...items.count-1{
+                if items[i].select == true{
+                    items[i].imageView.removeFromSuperview()
+                    items.remove(at: i)
+                    EmptyProprties()
+                    break
                 }
-                items[i].imageView.removeFromSuperview()
-                items.remove(at: i)
-                EmptyProprties()
-                break
             }
         }
     }
@@ -391,8 +409,7 @@ class ViewController: UIViewController, UIScrollViewDelegate{
             for i in 0...items.count-1 {
                 if items[i].select == true {
                     items[i].angle += 1/6 * .pi
-                    items[i].updateImage(xPos: items[i].x, yPos: items[i].y)
-
+                    items[i].imageView.transform = CGAffineTransform(rotationAngle: items[i].angle)
                 }
             }
         }
@@ -421,10 +438,7 @@ class ViewController: UIViewController, UIScrollViewDelegate{
     //Play_Button-----------------------------------------------------------------------------------------------------------------------------Play_Button
     @IBAction func playAnimation(_ sender: Any) {
         if animations.count > 0{
-            if animating == false{
-                animating = true
-                AnimateList(loop:aniStep,end:animations.count)
-            }
+        AnimateList(loop:0,end:animations.count)
         }
     }
     
@@ -434,7 +448,7 @@ class ViewController: UIViewController, UIScrollViewDelegate{
         if items.count > 0{
             for i in 0...items.count-1{
                 if items[i].select == true{
-                    items[i].height = abs(Int(heightInfoBox.text!) ?? 10)
+                    items[i].height = abs(Int(heightInfoBox.text!) ?? 0)
                 }
             }
         }
@@ -444,14 +458,13 @@ class ViewController: UIViewController, UIScrollViewDelegate{
         if items.count > 0{
             for i in 0...items.count-1{
                 if items[i].select == true{
-                    items[i].width = abs(Int(widthInfoBox.text!) ?? 10)
+                    items[i].width = abs(Int(widthInfoBox.text!) ?? 0)
                 }
             }
         }
     }
     //Y_position.......................................................................................................................Y_position
     @IBAction func YposItem(_ sender: Any) {
-        yPosInfoBox.keyboardType = UIKeyboardType.numberPad
         if items.count > 0{
             for i in 0...items.count-1{
                 if items[i].select == true{
@@ -462,7 +475,6 @@ class ViewController: UIViewController, UIScrollViewDelegate{
     }
     //X_position.......................................................................................................................X_position
     @IBAction func xPosItem(_ sender: Any) {
-        self.xPosInfoBox.keyboardType = UIKeyboardType.decimalPad
         if items.count > 0{
             for i in 0...items.count-1{
                 if items[i].select == true{
@@ -486,7 +498,7 @@ class ViewController: UIViewController, UIScrollViewDelegate{
             for i in 0...items.count-1{
                 if items[i].select == true{
                     items[i].angle = CGFloat(Int(angleInfoBox.text!) ?? 0) / 57.2958
-                    //items[i].imageView.transform = CGAffineTransform(rotationAngle: items[i].angle)
+                    items[i].imageView.transform = CGAffineTransform(rotationAngle: items[i].angle)
                 }
             }
         }
@@ -578,10 +590,7 @@ class ViewController: UIViewController, UIScrollViewDelegate{
             for i in 0...items.count-1{
                 if items[i].select == true {
                     animations.append(Animator(x: Int(MyView.frame.width/2), y: Int(MyView.frame.height/2),
-                                               time: 1, identity: items[i],type: false, screen: MyView,simple: false)!)
-                    for i in 0...animations.count-1{
-                        animations[i].open = false
-                    }
+                                               time: 1, identity: items[i],type: false, screen: Int(MyView.frame.height))!)
                     animations[animations.count-1].open = true
                 }
             }
@@ -601,7 +610,7 @@ class ViewController: UIViewController, UIScrollViewDelegate{
                           angle : 0,
                           name: "Unnamed light",
                           type: "Light Circle")!)
-        BackgroundImage.addSubview(items[items.count-1].sv)
+        BackgroundImage.addSubview(items[items.count-1].imageView)
         items[items.count-1].updateImage(xPos: items[items.count-1].x, yPos: items[items.count-1].y)
     }
     
@@ -617,90 +626,24 @@ class ViewController: UIViewController, UIScrollViewDelegate{
                           angle : 0,
                           name: "Unnamed Prop",
                           type: "Prop Shape Tool")!)
-        BackgroundImage.addSubview(items[items.count-1].sv)
+        BackgroundImage.addSubview(items[items.count-1].imageView)
         items[items.count-1].updateImage(xPos: items[items.count-1].x, yPos: items[items.count-1].y)
-    }
-    
-    @IBAction func addCurtainAni(_ sender: Any) {
-        animations.append(Animator(x: 0, y: 0, time: 1, identity: items[0], type: false, screen: MyView, simple: true)!)
-        animations[animations.count-1].open = true
-        UpdateAnimationMenu()
-    }
-    @IBAction func stopAnimation(_ sender: Any) {
-        animating = false
-        DispatchQueue.main.asyncAfter(deadline: .now() + animations[aniStep].time) {
-            self.aniStep = 0
-        }
-    }
-    @IBAction func pauseAnimation(_ sender: Any) {
-        animating = false
-    }
-    
-    
-    //Funtions//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////Funtions
-    func drawArrow(ani: Int){
-        let x = Float(animations[ani].x)
-        let y = Float(animations[ani].y)
-        var preX = Float(0.0)
-        var preY = Float(0.0)
-       
-        if ani == 0 {
-            preX = Float(animations[ani].identity.x)
-            preY = Float(animations[ani].identity.y)
-        }else{
-            preX = Float(animations[(ani-1)].x)
-            preY = Float(animations[(ani-1)].y)
-        }
-        var adj = Int(preX-x)
-        var opp = Int(preY-y)
-        opp = Int(pow(Double(opp),2))
-        adj = Int(pow(Double(adj),2))
-        var tot = Float(opp+adj)
-        tot = tot.squareRoot()
-    
-        if adj != 0{
-            print("draw")
-            arrow = UIImageView.init(image: UIImage(named: "Arrow"))
-            arrow.frame = CGRect(x: 0, y: 0, width: 20, height: Int(tot))
-            var rot = CGFloat(atan(Double((preY-y)/(preX-x))))
-            if preX >= x {rot += CGFloat.pi/2}else{rot -= CGFloat.pi/2}
-            arrowRot.transform = CGAffineTransform(rotationAngle: rot)
-            arrowRot.frame = CGRect(x: Int(preX), y: Int(preY), width: 0, height: 0)
-            arrowRot.addSubview(arrow)
-            arrowRot.removeFromSuperview()
-            BackgroundImage.addSubview(arrowRot)
-        }
-    }
-    //FillAnimationMenu------------------------------------------------------------------------------------------------------FillAnimationMenu
-    
+    }//Funtions//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////Funtions
+        //FillAnimationMenu------------------------------------------------------------------------------------------------------FillAnimationMenu
     func UpdateAnimationMenu(){
-        var check = false
-        var space = 0
         
-        if aniScrollView.subviews.count > 2 {
+        if aniScrollView.subviews.count > 1 {
             for i in 0...animations.count-1{
                 animations[i].view.removeFromSuperview()
             }
         }
-        
+        var space = 0
         if animations.count > 0 {
             for i in 0...animations.count-1{
-                if animations[i].simple == true{
-                    space = animations[i].drawSimple(num: space)
+                if animations[i].open == true{
+                    space = animations[i].drawOpen(num: space)
                 }else{
-                    if animations[i].open == true{
-                        arrow.removeFromSuperview()
-                        arrowRot.removeFromSuperview()
-                        space = animations[i].drawOpen(num: space)
-                        drawArrow(ani: i)
-                        check = true
-                    }else{
-                        space = animations[i].drawClose(num: space)
-                        if check == false{
-                            arrow.removeFromSuperview()
-                            arrowRot.removeFromSuperview()
-                        }
-                    }
+                    space = animations[i].drawClose(num: space)
                 }
                 aniScrollView.addSubview(animations[i].view)
             }
@@ -775,17 +718,10 @@ class ViewController: UIViewController, UIScrollViewDelegate{
             animations[loop+j].view.backgroundColor = UIColor.green
             
             UIView.animate(withDuration: animations[loop+j].time) {
-                if self.animations[loop+j].simple == true{
-                    self.c1.frame = CGRect(x: self.c1.frame.origin.x, y: self.c1.frame.origin.y,
-                                           width: CGFloat(self.animations[loop+j].percent*(225/100)), height: self.c1.frame.height)
-                    self.c2.frame = CGRect(x: self.c1.frame.origin.x, y: self.c1.frame.origin.y,
-                                           width: CGFloat(self.animations[loop+j].percent*(190/100)), height: self.c1.frame.height)
-                }else{
-                    self.animations[loop+j].identity.x = self.animations[loop+j].x
-                    self.animations[loop+j].identity.y = self.animations[loop+j].y
-                    self.animations[loop+j].identity.updateImage(xPos: self.animations[loop+j].identity.x,
-                                                                 yPos: self.animations[loop+j].identity.y)
-                }
+                self.animations[loop+j].identity.x = self.animations[loop+j].x
+                self.animations[loop+j].identity.y = self.animations[loop+j].y
+                self.animations[loop+j].identity.updateImage(xPos: self.animations[loop+j].identity.x,
+                                                             yPos: self.animations[loop+j].identity.y)
             }
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + time) {
@@ -796,14 +732,7 @@ class ViewController: UIViewController, UIScrollViewDelegate{
             }
             numTogether+=1
             if loop+numTogether<end{
-                if self.animating{
-                    self.AnimateList(loop: loop+numTogether, end: end)
-                }else{
-                    self.aniStep = loop+numTogether
-                }
-            }else{
-                self.aniStep = 0
-                self.animating = false
+                self.AnimateList(loop: loop+numTogether, end: end)
             }
         }
     }
